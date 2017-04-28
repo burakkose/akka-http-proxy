@@ -4,8 +4,8 @@ sealed trait RunnableOperation[T] {
   def run(): Either[Throwable, T]
 }
 
-abstract case class Operation[T](filterType: OperationType,
-                                 filterPriorityLevel: OperationPriorityLevel,
+abstract case class Operation[T](operationType: OperationType,
+                                 operationPriorityLevel: OperationPriorityLevel,
                                  isDisabled: Boolean
                                 ) extends RunnableOperation[T] {
   def shouldOperation: Boolean = true
@@ -25,7 +25,7 @@ abstract case class Operation[T](filterType: OperationType,
 object Operation {
   implicit def ordering = new Ordering[Operation[_]] {
     override def compare(x: Operation[_], y: Operation[_]): Int = {
-      OperationPriorityLevel.ordering.compare(x.filterPriorityLevel, y.filterPriorityLevel)
+      OperationPriorityLevel.ordering.compare(x.operationPriorityLevel, y.operationPriorityLevel)
     }
   }
 }
