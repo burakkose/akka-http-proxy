@@ -4,6 +4,7 @@ import akka.actor.ActorSystem
 import akka.http.scaladsl.model.HttpResponse
 import akka.http.scaladsl.server.RequestContext
 import akka.http.scaladsl.{Http, HttpExt}
+import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.{Flow, Sink, Source}
 import com.github.gate4s.internal.AppConfig
 
@@ -12,7 +13,7 @@ import scala.concurrent.{ExecutionContext, Future}
 trait ProxyServer {
   implicit val actorSystem: ActorSystem
 
-  def doRequest(ctx: RequestContext, backOff: Int)
+  def doRequest(path: RequestContext, backOff: Int = 2)
                (implicit ec: ExecutionContext): Future[HttpResponse]
 
   protected def http: HttpExt
@@ -21,7 +22,8 @@ trait ProxyServer {
 }
 
 // TODO: Add backoff
-class DefaultProxyServer(implicit val actorSystem: ActorSystem) extends ProxyServer {
+class DefaultProxyServer(implicit val actorSystem: ActorSystem,
+                         implicit val mat: ActorMaterializer) extends ProxyServer {
   override protected val http: HttpExt = Http(actorSystem)
 
   override protected val routerFlowMapper = AppConfig.routes.mapValues(route => http.outgoingConnection(route.base, route.port))
