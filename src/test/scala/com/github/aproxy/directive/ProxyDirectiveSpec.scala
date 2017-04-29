@@ -1,4 +1,4 @@
-package com.github.gate4s.directive
+package com.github.aproxy.directive
 
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.testkit.ScalatestRouteTest

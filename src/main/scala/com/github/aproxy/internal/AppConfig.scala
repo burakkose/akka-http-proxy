@@ -1,4 +1,4 @@
-package com.github.gate4s.internal
+package com.github.aproxy.internal
 
 case class Route(base: String, port: Int)
 

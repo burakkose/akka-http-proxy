@@ -1,4 +1,4 @@
-package com.github.gate4s.http
+package com.github.aproxy.http
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.model.HttpResponse
@@ -6,7 +6,7 @@ import akka.http.scaladsl.server.RequestContext
 import akka.http.scaladsl.{Http, HttpExt}
 import akka.stream.ActorMaterializer
 import akka.stream.scaladsl.{Flow, Sink, Source}
-import com.github.gate4s.internal.AppConfig
+import com.github.aproxy.internal.AppConfig
 
 import scala.concurrent.{ExecutionContext, Future}
 

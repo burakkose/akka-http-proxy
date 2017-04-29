@@ -1,4 +1,4 @@
-name := "gate4s"
+name := "akka-http-proxy"
 
 version := "0.1.0"
 
